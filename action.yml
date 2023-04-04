@@ -1,0 +1,14 @@
+name: 'Auto Version'
+description: 'Automatically update the tag to the latest version'
+outputs:
+  version:
+    description: "The new version"
+    value: ${{ steps.version-generator.outputs.version }}
+runs:
+  using: "composite"
+  steps:
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      shell: bash
+    - id: version-generator
+      run: autoversion/main.py >> $GITHUB_OUTPUT
+      shell: bash

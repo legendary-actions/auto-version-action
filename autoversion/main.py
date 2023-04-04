@@ -14,6 +14,6 @@ amount_since_last = subprocess.run(['git', 'rev-list', f'{last_tag}..HEAD', '--c
 current_branch = subprocess.run(['git', 'branch', '--show-current'], stdout=subprocess.PIPE).stdout.decode('utf-8').replace("\n", "")
 
 if current_branch != "master":
-    print(current_branch.replace('/', '-'))
+    print("version=" + current_branch.replace('/', '-'))
 else:
-    print(update_tag(last_tag, int(amount_since_last)))
+    print("version=" + update_tag(last_tag, int(amount_since_last)))
