@@ -7,8 +7,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash
+    - uses: actions/checkout@v3
     - id: version-generator
-      run: python3 ./autoversion/main.py >> $GITHUB_OUTPUT
+      run: ${{ github.action_path }}/autoversion/main.py >> $GITHUB_OUTPUT
       shell: bash

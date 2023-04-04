@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import subprocess
 
 def update_tag(last_tag, amount=1):
