@@ -13,6 +13,6 @@ runs:
     - id: version-generator
       run: chmod +x ${{ github.action_path }}/autoversion/main.py && ${{ github.action_path }}/autoversion/main.py >> "$GITHUB_OUTPUT"
       shell: bash
-    - id: version-generator
+    - id: version-generator-print
       run: ${{ github.action_path }}/autoversion/main.py
       shell: bash
