@@ -9,5 +9,5 @@ runs:
   steps:
     - uses: actions/checkout@v3
     - id: version-generator
-      run: ${{ github.action_path }}/autoversion/main.py >> $GITHUB_OUTPUT
+      run: chmod +x ${{ github.action_path }}/autoversion/main.py && ${{ github.action_path }}/autoversion/main.py >> $GITHUB_OUTPUT
       shell: bash
