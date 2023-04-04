@@ -7,9 +7,11 @@ def update_tag(last_tag, amount=1):
     parts.append(str(patch_version))
     return ".".join(parts)
 
-last_tag = subprocess.run(['git', 'describe', '--tags', '--abbrev=0'], stdout=subprocess.PIPE)
-amount_since_last = subprocess.run(['git', 'rev-list', f'{last_tag.stdout.decode("utf-8")}..HEAD', '--count'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-current_branch = subprocess.run(['git', 'branch', '--show-current'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+last_tag_cmd = subprocess.run(['git', 'describe', '--tags', '--abbrev=0'], stdout=subprocess.PIPE)
+last_tag = last_tag_cmd.stdout.decode("utf-8")
+last_tag = last_tag.replace("\n", "")
+amount_since_last = subprocess.run(['git', 'rev-list', f'{last_tag}..HEAD', '--count'], stdout=subprocess.PIPE).stdout.decode('utf-8').replace("\n", "")
+current_branch = subprocess.run(['git', 'branch', '--show-current'], stdout=subprocess.PIPE).stdout.decode('utf-8').replace("\n", "")
 
 if current_branch != "master":
     print(current_branch.replace('/', '-'))
